@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - ParkSmart</title>
+    <title>Login - ParkSmart</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         body {
@@ -12,9 +12,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 0;
             height: 100vh;
-            overflow: hidden;
+            overflow: hidden; /* Prevent scrolling */
         }
 
         header {
@@ -27,6 +26,11 @@
 
         header h1 {
             color: white;
+        }
+
+        header h1 a {
+            text-decoration: none;
+            color: inherit;
         }
 
         nav ul {
@@ -47,24 +51,26 @@
         .topnav {
             margin-left: 20px;
         }
-        .register-container {
+
+        .tabs a {
+            color: white; /* Set link color to white */
+        }
+
+        .login-container {
             background-color: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 300px;
             text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            margin-top: 50px; /* Adjust this value to position the container */
         }
 
-        .register-container h2 {
+        .login-container h2 {
             margin-bottom: 20px;
         }
 
-        .register-container input {
+        .login-container input {
             width: 92%;
             padding: 10px;
             margin: 10px 0;
@@ -72,8 +78,8 @@
             border-radius: 5px;
         }
 
-        .register-container button {
-            width: 100%;
+        .login-container button {
+            width: 95%;
             padding: 10px;
             background-color: #007bff;
             color: white;
@@ -82,25 +88,25 @@
             cursor: pointer;
         }
 
-        .register-container button:hover {
+        .login-container button:hover {
             background-color: #0056b3;
         }
 
-        .register-container a {
+        .login-container a {
             display: block;
             margin-top: 10px;
             color: #007bff;
             text-decoration: none;
         }
 
-        .register-container a:hover {
+        .login-container a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
 <header>
-    <h1 class="topnav">ParkSmart</h1>
+    <h1 class="topnav"><a href="index.html">ParkSmart</a></h1>
     <nav>
         <ul>
             <li class="tabs"><a href="index.html">Home</a></li>
@@ -109,15 +115,15 @@
         </ul>
     </nav>
 </header>
-<div class="register-container">
-    <h2>Register for ParkSmart</h2>
+
+<div class="login-container">
+    <h2>Login to ParkSmart</h2>
     <form action="index.html" method="post">
-        <input type="email" name="email" placeholder="Email" required>
         <input type="text" name="username" placeholder="Username" required>
         <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
     </form>
-    <a href="login.html">Already have an account? Login</a>
+    <a href="register.html">Don't have an account? Register</a>
 </div>
 </body>
 </html>
