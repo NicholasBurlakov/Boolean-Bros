@@ -5,51 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ParkSmart</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        header h1 a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .tabs a {
+            color: white; /* Set link color to white */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>ParkSmart</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main>
-        <section id="home">
-            <h2>Welcome to Online Parking</h2>
-            <p>Find and reserve parking spaces hassle-free.</p>
-            <a href="home.html" class="btn">Learn More</a>
-        </section>
-        
-        <section id="about">
-            <h2>About Us</h2>
-            <p>Here we talk about who we are, what our project mission is...</p>
-            <a href="about.html" class="btn">Learn More</a>
-        </section>
-        
-        <section id="services">
-            <h2>Our Services</h2>
-            <p>Explore the services we offer for convenient parking.</p>
+<header>
+    <h1><a href="index.html">ParkSmart</a></h1>
+    <nav>
+        <ul>
+            <li class="tabs"><a href="#home">Home</a></li>
+            <li class="tabs"><a href="#about">About</a></li>
+            <li class="tabs"><a href="#services">Services</a></li>
+            <li class="tabs"><a href="login.html">Login</a></li> <!-- Updated link to login.html -->
+        </ul>
+    </nav>
+</header>
 
-            <a href="services.html" class="btn">Learn More</a>
-        </section>
-        <p>API Test ...</p>
-        <p>Loading content from the API: <b id="name">...</b></p>
+<main>
+    <section id="home">
+        <h2>Welcome to Online Parking</h2>
+        <p>Find and reserve parking spaces hassle-free.</p>
+        <a href="home.html" class="btn">Learn More</a>
+    </section>
 
-    </main>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Here we talk about who we are, what our project mission is...</p>
+        <a href="about.html" class="btn">Learn More</a>
+    </section>
 
-    <footer>
-        <p>&copy; 2024 Online Parking. All rights NOT reserved.</p>
-    </footer>
-    <script>
-        (async function() {
-            const { text } = await( await fetch(`/api/message`)).json();
-            document.querySelector('#name').textContent = text;
-        }());
-        </script>
+    <section id="services">
+        <h2>Our Services</h2>
+        <p>Explore the services we offer for convenient parking.</p>
+        <a href="services.html" class="btn">Learn More</a>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 Online Parking. All rights not reserved.</p>
+</footer>
 </body>
 </html>
