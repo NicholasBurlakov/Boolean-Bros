@@ -37,10 +37,19 @@
 
             <a href="services.html" class="btn">Learn More</a>
         </section>
+        <p>API Test ...</p>
+        <p>Loading content from the API: <b id="name">...</b></p>
+
     </main>
 
     <footer>
-        <p>&copy; 2024 Online Parking. All rights not reserved.</p>
+        <p>&copy; 2024 Online Parking. All rights NOT reserved.</p>
     </footer>
+    <script>
+        (async function() {
+            const { text } = await( await fetch(`/api/message`)).json();
+            document.querySelector('#name').textContent = text;
+        }());
+        </script>
 </body>
 </html>
