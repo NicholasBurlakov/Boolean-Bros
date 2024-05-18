@@ -112,6 +112,30 @@
     button:hover {
       background-color: #388e3c;
     }
+    /* Media Queries */
+     @media (min-width: 400px) {
+        .grid {
+            grid-template-columns: repeat(3, 1fr); /*Adjust for slightly wider screens */
+        }
+    }
+
+    @media (min-width: 768px) {
+        .grid {
+            grid-template-columns: repeat(5, 1fr); /* Standard tablets and small desktops  */
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .grid {
+            grid-template-columns: repeat(10, 50fr); /*Large desktops, back to original setup*/
+        }
+    } 
+    
+    @media (min-width: 1440px) {
+    .grid {
+        grid-template-columns: repeat(15, 1fr); /* Very large desktops, make denser */
+    }
+}
 
     footer {
       text-align: center;
