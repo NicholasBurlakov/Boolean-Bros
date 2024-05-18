@@ -54,15 +54,15 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(10, 100px);
-      gap: 5px 5px;
+      grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
+      gap: 5px;
       justify-content: center;
       margin-bottom: 20px;
     }
 
-    .spot.end-of-double-row {
+    /* .spot.end-of-double-row {
       margin-bottom: 150px;
-    }
+    } */
 
     .spot {
       width: 100px;
@@ -112,24 +112,6 @@
     button:hover {
       background-color: #388e3c;
     }
-    /* Media Queries */
-     @media (min-width: 400px) {
-        .grid {
-            grid-template-columns: repeat(3, 1fr); /*Adjust for slightly wider screens */
-        }
-    }
-
-    @media (min-width: 768px) {
-        .grid {
-            grid-template-columns: repeat(5, 1fr); /* Standard tablets and small desktops  */
-        }
-    }
-
-    @media (min-width: 1024px) {
-        .grid {
-            grid-template-columns: repeat(10, 100px); /*Large desktops, back to original setup*/
-        }
-    } 
 
     footer {
       text-align: center;
