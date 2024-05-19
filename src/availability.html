@@ -6,30 +6,6 @@
   <title>Parking Availability</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    header h1 {
-      padding-bottom: 20px; /* Adds more space below the h1 element */
-    }
-    nav ul {
-      list-style-type: none;
-      display: flex;
-      padding: 0;
-      margin: 0;
-    }
-
-    nav ul li {
-      margin-right: 10px;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-    }
-
-    main {
-      padding: 20px;
-      color: #d4d6d8;
-    }
-
     .search-container {
       flex: 1;
       display: flex;
@@ -59,10 +35,6 @@
       justify-content: center;
       margin-bottom: 20px;
     }
-
-    /* .spot.end-of-double-row {
-      margin-bottom: 150px;
-    } */
 
     .spot {
       width: 100px;
@@ -120,12 +92,19 @@
       padding: 10px 0;
     }
 
+    /*nav ul {*/
+    /*  margin-right: auto;*/
+    /*  text-align: right;*/
+    /*}*/
+
   </style>
 </head>
 <body>
   <header>
-    <h1>Parking Availability</h1>
-    
+    <h1><a href="index.html">ParkSmart</a> - Parking Availability</h1>
+    <div class="search-container">
+      <input class="search-input" placeholder="Search for a lot...">
+    </div>
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -134,11 +113,8 @@
         <li><a href="login.html">Login</a></li>
       </ul>
     </nav>
-    <div class="search-container">
-      <input class="search-input" placeholder="Search for a lot...">
-    </div>
   </header>
-  
+
   <main>
     <section id="reservation-section">
       <button id="reserve-button">Reserve</button>
