@@ -45,12 +45,11 @@ header h1 a{
 nav ul {
     list-style-type: none;
     padding: 0;
-    align-items: center;
     text-align: center;
 }
 
 nav ul li {
-    display: inline-block;
+    display: inline-flex;
     text-align: center;
     margin-right: 20px;
 }
