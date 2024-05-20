@@ -24,8 +24,8 @@ body {
 header {
     background-color: #333;
     color: #fff;
-    padding: 20px;
-    display: flex;
+    padding: 10px;
+    display: inline;
     justify-content: space-between;
     align-items: center;
 
@@ -33,8 +33,10 @@ header {
 
 header h1 {
     margin: 0;
+    padding-top: 10px;
 }
 header h1 a{
+    padding-top: 0px;
     color: white;
     text-decoration: none;
 }
@@ -42,12 +44,13 @@ header h1 a{
 nav ul {
     list-style-type: none;
     padding: 0;
-    margin: 0;
     display: flex;
+    text-align: left;
 }
 
 nav ul li {
-    margin: 0 10px;
+    display: inline;
+    margin-right: 20px;
 }
 
 nav ul li a {
