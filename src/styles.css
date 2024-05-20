@@ -34,6 +34,7 @@ header {
 header h1 {
     margin: 0;
     padding-top: 10px;
+    text-align: center;
 }
 header h1 a{
     padding-top: 0px;
@@ -44,12 +45,13 @@ header h1 a{
 nav ul {
     list-style-type: none;
     padding: 0;
-    display: flex;
-    text-align: left;
+    align-items: center;
+    text-align: center;
 }
 
 nav ul li {
     display: inline;
+    text-align: center;
     margin-right: 20px;
 }
 
