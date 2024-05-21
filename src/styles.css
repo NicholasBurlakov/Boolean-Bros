@@ -97,6 +97,7 @@ button:hover {
 
     nav ul li {
     display: block;
+    text-align: left;
    }
 }
 

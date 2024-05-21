@@ -47,6 +47,12 @@
       margin-bottom: 20px;
     }
 
+    @media (min-width: 800px) {
+      .grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, calc(100%/10 - 5px))); /* Adjust column width and maintain gap */
+      }
+    }
+
     .spot {
       width: 100px;
       height: 150px;
