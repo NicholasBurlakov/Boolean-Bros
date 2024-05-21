@@ -71,32 +71,34 @@ button {
     color: white;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s;
   }
 
-  button:hover {
+/* button:hover { 
+    //This made it look good on PC, but for some reason on mobile it always
+    //looked darker blue, if someone can fix it go ahead! **Tyler**
     background-color: #025cbd;
-  }
+} */
 
 .menu-toggle {
-  display: none; /* Hide toggle button on larger screens */
+  display: none;
   font-size: 24px;
   cursor: pointer;
 }
 
 @media (max-width: 600px) {
   .nav-list {
-    display: none; /* Hidden by default, shown when menu is toggled */
-    flex-direction: column; /* This will stack links vertically */
+    display: none;
+    flex-direction: column;
     width: 100%;
   }
 
    .menu-toggle {
     display: block;
+    color: white;
    }
 
     nav ul li {
-    display: block; /* This ensures each item is on its own line */
+    display: block;
    }
 }
 
@@ -126,8 +128,4 @@ footer {
     padding: 10px;
     text-align: center;
     margin-top: auto;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 9a9ce5d9cb7cf5debf7920eee737eab0573eea51
