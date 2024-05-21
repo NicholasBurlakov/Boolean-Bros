@@ -5,20 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Parking - About</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        nav ul li a {
+        display: block;
+        text-align: center;
+        padding: 5px;
+        }
+    </style>
 </head>
 <body>
+<div class="wrapper">
     <header>
-        <h1>Online Parking</h1>
-        <nav>
+        <h1><a href="index.html">ParkSmart</a> - About Us</h1>
+        <button class="menu-toggle" aria-label="Open navigation menu">&#9776;</button> <!-- Hamburger icon -->
+        <nav class="nav-list">
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="services.html">Services</a></li>
                 <li><a href="availability.html">Parking Availability</a></li>
+                <li><a href="login.html">Login</a></li>
             </ul>
         </nav>
     </header>
-    
+
     <main>
         <section id="about">
             <h2>About Us</h2>
@@ -29,5 +39,7 @@
     <footer>
         <p>&copy; 2024 Online Parking. All rights not reserved.</p>
     </footer>
+    <script src="app.js"></script>
+</div>
 </body>
 </html>

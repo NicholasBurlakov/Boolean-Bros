@@ -6,61 +6,16 @@
     <title>Register - ParkSmart</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f9fa;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2px 3px;
-        }
-
-        header h1 a{
-            color: white;
-            text-decoration: none;
-        }
-
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-        }
-
-        nav ul li {
-            margin-right: 20px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: white;
-        }
-
-        .topnav {
-            margin-left: 20px;
-            color: white;
-            text-decoration: none;
-        }
         .register-container {
             background-color: white;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: 100%;
+            max-width: 300px;
             text-align: center;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            align-items: center;
+            margin: 50px auto auto;
         }
 
         .register-container h2 {
@@ -99,17 +54,25 @@
         .register-container a:hover {
             text-decoration: underline;
         }
+
+        nav ul li a {
+        display: block;
+        /* text-align: center; */
+        padding: 5px;
+        }
     </style>
 </head>
 <body>
 <header>
-    <h1 class="topnav"><a href="index.html">ParkSmart</a></h1>
-    <nav>
+    <h1><a href="index.html">ParkSmart</a> - Register User</h1>
+    <button class="menu-toggle" aria-label="Open navigation menu">&#9776;</button> <!-- Hamburger icon -->
+    <nav class="nav-list">
         <ul>
-            <li class="tabs"><a href="index.html">Home</a></li>
-            <li class="tabs"><a href="about.html">About</a></li>
-            <li class="tabs"><a href="services.html">Services</a></li>
-            <li class="tabs"><a href="availability.html">Parking Availability</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="availability.html">Parking Availability</a></li>
+            <li><a href="login.html">Login</a></li>
         </ul>
     </nav>
 </header>
@@ -123,5 +86,6 @@
     </form>
     <a href="login.html">Already have an account? Login</a>
 </div>
+<script src="app.js"></script>
 </body>
 </html>

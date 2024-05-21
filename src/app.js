@@ -31,24 +31,29 @@ function renderParkingLots(filter = '') {
     const section = document.createElement('section');
     section.className = 'lot-section';
     section.id = lot.lotId.replace(' ', '-').toLowerCase();
-    section.innerHTML = `<h2>${lot.lotId}</h2><div class="grid"></div>`;
+    section.innerHTML = `<h2>${lot.lotId}</h2><div class="grid" style="display: none;"></div>`;
     
     const grid = section.querySelector('.grid');
-    let totalSpots = allSpots.filter(spot => spot.lotId === lot.lotId).length;
-    let spotCounter = 0;
+    const lotHeader = section.querySelector('h2');
+
+    lotHeader.addEventListener('click', () => {
+      // Toggle the display of the grid
+      if (grid.style.display === 'none') {
+        grid.style.display = 'grid';
+      } else {
+        grid.style.display = 'none';
+      }
+    });
 
     allSpots.filter(spot => spot.lotId === lot.lotId).forEach((spot, index) => {
       const spotElement = document.createElement('div');
       spotElement.className = 'spot ' + (spot.reserved ? 'reserved' : spot.selected ? 'selected' : 'available');
       spotElement.textContent = `Spot ${spot.spotNumber}`;
-      spotElement.onclick = () => toggleSingleSelection(spot);
+      spotElement.onclick = (event) => {
+        toggleSingleSelection(spot, event);
+        event.stopPropagation();  // Ensure propagation is stopped here as well
+      };
       grid.appendChild(spotElement);
-
-      spotCounter++;
-      // Check if the next row exists before adding a larger gap class
-      if (spotCounter % 20 === 0 && totalSpots > spotCounter) { // Ensure there are more spots after this row
-        spotElement.classList.add('end-of-double-row');
-      }
     });
 
     mainContainer.appendChild(section);
@@ -64,8 +69,8 @@ function renderParkingLots(filter = '') {
 
 
 
-// Function to toggle the selection/unselection of a spot
-function toggleSingleSelection(spot) {
+
+function toggleSingleSelection(spot, event) {
   if (!spot.reserved) {
     // Deselect all spots before selecting the new one
     allSpots.forEach(s => {
@@ -74,10 +79,14 @@ function toggleSingleSelection(spot) {
     spot.selected = !spot.selected;  // Toggle the selection state of the clicked spot
     renderParkingLots(); // Re-render to reflect the updated selection
   }
+  // Prevent the click from bubbling up to the lot header
+  event.stopPropagation();
 }
 
+
+
 // Function to reserve the selected spot
-function reserveSelected() {
+function reserveSelected(event) {
   allSpots.forEach(spot => {
     if (spot.selected) {
       spot.reserved = true;
@@ -85,7 +94,9 @@ function reserveSelected() {
     }
   });
   renderParkingLots(); // Re-render to reflect the reservation
+  event.stopPropagation(); // Stop propagation here
 }
+
 
 // Search functionality
 function setupSearch() {
@@ -107,9 +118,30 @@ function setupSearch() {
   }
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+  // Always set up the menu toggle
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navList = document.querySelector('.nav-list');
+  const searchInput = document.querySelector('.search-input');
+  if (searchInput) {
+    searchInput.oninput = () => renderParkingLots(searchInput.value);
+  }
 
-// Initial setup
-document.addEventListener('DOMContentLoaded', () => {
-  renderParkingLots();
-  //setupSearch();
+  menuToggle.addEventListener('click', function() {
+    // Toggle display based on current state
+    if (navList.style.display === 'block') {
+      navList.style.display = 'none';
+    } else {
+      navList.style.display = 'block';
+    }
+  });
+
+  // Get the current page's URL
+  const currentPage = window.location.pathname;
+
+  // Check if the current page is 'availability.html'
+  if (currentPage.match(/availability\.html$/)) {
+    renderParkingLots();
+    // setupSearch();
+  }
 });

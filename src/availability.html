@@ -6,46 +6,30 @@
   <title>Parking Availability</title>
   <link rel="stylesheet" href="styles.css">
   <style>
-    header h1 {
-      padding-bottom: 20px; /* Adds more space below the h1 element */
-    }
-    nav ul {
-      list-style-type: none;
-      display: flex;
-      padding: 0;
-      margin: 0;
-    }
 
-    nav ul li {
-      margin-right: 10px;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-    }
-
-    main {
-      padding: 20px;
-      color: #d4d6d8;
+    section{
+      border-radius: 0;
     }
 
     .search-container {
       flex: 1;
       display: flex;
       justify-content: center;
+      padding-bottom: 10px;
     }
 
     .search-input {
       padding: 8px 10px;
       font-size: 16px;
-      width: 50%;
+      width: flex;
     }
 
     .lot-section {
       padding: 20px;
       margin-bottom: 30px;
       border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
     }
 
     .lot-section h2 {
@@ -59,10 +43,6 @@
       justify-content: center;
       margin-bottom: 20px;
     }
-
-    /* .spot.end-of-double-row {
-      margin-bottom: 150px;
-    } */
 
     .spot {
       width: 100px;
@@ -91,27 +71,23 @@
     }
 
     #reservation-section {
+      width: auto;
       position: sticky;
-      bottom: 0px;
+      bottom: 0;
       background: #333;
       padding: 10px;
+      margin-left: -20px;
+      margin-right: -20px;
+      margin-bottom: -20px;
       text-align: center;
+      /* z-index: 1000; */
     }
 
-    button {
-      padding: 10px 20px;
-      background-color: #4caf50;
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s;
+    html, body {
+      height: 100%;
+      margin: 0;
     }
 
-    button:hover {
-      background-color: #388e3c;
-    }
 
     footer {
       text-align: center;
@@ -120,25 +96,32 @@
       padding: 10px 0;
     }
 
+    nav ul li a {
+      display: block;
+      text-align: center;
+      padding: 5px;
+    }
+
   </style>
 </head>
 <body>
   <header>
-    <h1>Parking Availability</h1>
-    
+    <h1><a href="index.html">ParkSmart</a> - Parking Availability</h1>
+    <button class="menu-toggle" aria-label="Open navigation menu">&#9776;</button> <!-- Hamburger icon -->
     <nav>
-      <ul>
+      <ul class="nav-list">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="services.html">Services</a></li>
+        <li><a href="availability.html">Parking Availability</a></li>
         <li><a href="login.html">Login</a></li>
       </ul>
     </nav>
     <div class="search-container">
       <input class="search-input" placeholder="Search for a lot...">
     </div>
-  </header>
-  
+</header>
+
   <main>
     <section id="reservation-section">
       <button id="reserve-button">Reserve</button>
