@@ -41,15 +41,15 @@
 
     .grid {
       display: grid;
+      grid-gap: 5px;
       grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
-      gap: 5px;
       justify-content: center;
-      margin-bottom: 20px;
+      margin-bottom: 20px; 
     }
 
-    @media (min-width: 800px) {
+    @media (min-width: 1024px) {
       .grid {
-        grid-template-columns: repeat(auto-fill, minmax(100px, calc(100%/10 - 5px))); /* Adjust column width and maintain gap */
+        grid-template-columns: repeat(10, 100px);
       }
     }
 
