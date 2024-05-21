@@ -73,11 +73,9 @@ button {
     cursor: pointer;
   }
 
-/* button:hover { 
-    //This made it look good on PC, but for some reason on mobile it always
-    //looked darker blue, if someone can fix it go ahead! **Tyler**
+button:hover { 
     background-color: #025cbd;
-} */
+}
 
 .menu-toggle {
   display: none;
