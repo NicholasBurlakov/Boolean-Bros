@@ -27,37 +27,34 @@ function renderParkingLots(filter = '') {
 
   const filteredLots = parkingLots.filter(lot => lot.lotId.toLowerCase().includes(filter.toLowerCase()));
 
-  // Enhanced event listener logic for sections
-filteredLots.forEach(lot => {
-  const section = document.createElement('section');
-  section.className = 'lot-section';
-  section.id = lot.lotId.replace(' ', '-').toLowerCase();
-  section.innerHTML = `<h2>${lot.lotId}</h2><div class="grid" style="display: none;"></div>`;
-  
-  const grid = section.querySelector('.grid');
+  filteredLots.forEach(lot => {
+    const section = document.createElement('section');
+    section.className = 'lot-section';
+    section.id = lot.lotId.replace(' ', '-').toLowerCase();
+    section.innerHTML = `<h2>${lot.lotId}</h2><div class="grid"></div>`;
+    
+    
+    const grid = section.querySelector('.grid');
 
-  section.addEventListener('click', (event) => {
-    if ((event.target === section || event.target === section.children[0]) && !event.target.closest('.grid')) {
-      const grid = section.querySelector('.grid');
-      grid.style.display = grid.style.display === 'none' ? 'grid' : 'none';
-    }
-  });
+    // section.addEventListener('click', (event) => {
+    //   if (event.target === section || event.target.tagName === 'H2') {
+    //     grid.style.display = grid.style.display === 'none' ? 'grid' : 'none';
+    //   }
+    // });
 
-  allSpots.filter(spot => spot.lotId === lot.lotId).forEach((spot, index) => {
-    const spotElement = document.createElement('div');
-    spotElement.className = 'spot ' + (spot.reserved ? 'reserved' : spot.selected ? 'selected' : 'available');
-    spotElement.textContent = `Spot ${spot.spotNumber}`;
-    spotElement.addEventListener('click', (event) => {
-      toggleSingleSelection(spot, event);
-      event.stopPropagation(); // This stops the click event from bubbling up to the section
+    allSpots.filter(spot => spot.lotId === lot.lotId).forEach((spot, index) => {
+      const spotElement = document.createElement('div');
+      spotElement.className = 'spot ' + (spot.reserved ? 'reserved' : spot.selected ? 'selected' : 'available');
+      spotElement.textContent = `Spot ${spot.spotNumber}`;
+      spotElement.addEventListener('click', (event) => {
+        toggleSingleSelection(spot, event);
+        event.stopPropagation(); // This stops the click event from bubbling up to the section
+      });
+      grid.appendChild(spotElement);
     });
-    grid.appendChild(spotElement);
+
+    mainContainer.appendChild(section);
   });
-
-  mainContainer.appendChild(section);
-});
-
-  
 
   // Append reservation section at the end
   const reservationSection = document.createElement('section');
@@ -66,7 +63,6 @@ filteredLots.forEach(lot => {
   mainContainer.appendChild(reservationSection);
   document.getElementById('reserve-button').addEventListener('click', reserveSelected);
 }
-
 
 
 
@@ -82,7 +78,6 @@ function toggleSingleSelection(spot, event) {
   // Prevent the click from bubbling up to the lot header
   event.stopPropagation();
 }
-
 
 
 // Function to reserve the selected spot
@@ -116,6 +111,13 @@ function setupSearch() {
     // If there is no second child, append at the end
     header.appendChild(searchInput);
   }
+}
+
+function scaleGrid(grid, scale) {
+  const currentTransform = grid.style.transform || 'scale(1)';
+  const match = /scale\(([^)]+)\)/.exec(currentTransform);
+  const currentScale = match ? parseFloat(match[1]) : 1;
+  grid.style.transform = `scale(${currentScale * scale})`;
 }
 
 document.addEventListener('DOMContentLoaded', function() {
