@@ -102,10 +102,10 @@
     <p>&copy; 2024 Online Parking. All rights not reserved.</p>
 </footer>
 <script src = "app.js">
-    // (async function() {
-    //     const { text } = await (await fetch(`/api/message`)).json();
-    //     document.querySelector('#name').textContent = text;
-    // }());
+    (async function() {
+        const { text } = await (await fetch(`/api/message`)).json();
+        document.querySelector('#name').textContent = text;
+    }());
 </script>
 </body>
 </html>
