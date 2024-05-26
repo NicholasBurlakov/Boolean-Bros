@@ -61,6 +61,17 @@
         /* text-align: center; */
         padding: 5px;
         }
+
+        .visually-hidden {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: -1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
     </style>
 </head>
 <body>
@@ -68,7 +79,6 @@
     <h1><a href="index.html">ParkSmart</a></h1>
     <button class="menu-toggle" aria-label="Open navigation menu">&#9776;</button>
     <nav class="nav-list">
-    <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
@@ -80,10 +90,15 @@
 </header>
 <div class="register-container">
     <h2>Register for ParkSmart</h2>
-    <form action="index.html" method="post">
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" name="password" placeholder="Password" required>
+    <form action="index.html" method="get">
+        <label for="email" class="visually-hidden">email</label>
+        <input type="email" id="email" placeholder="Email" required>
+
+        <label for="username" class="visually-hidden">Username</label>
+        <input type="text" id="username" placeholder="Username" required>
+
+        <label for="password" class="visually-hidden">Username</label>
+        <input type="password" id="password" placeholder="Password" required>
 
         <button type="submit" onclick="createAccount()">Register</button>
         <a href="login.html">Already have an account? Login</a>
