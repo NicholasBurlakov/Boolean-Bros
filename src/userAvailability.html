@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Availability</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="256x256" href="ParkSmart.png">
+    <style>
+
+        section{
+            border-radius: 0;
+        }
+
+        .search-container {
+            flex: 1;
+            display: flex;
+            padding-top: 10px;
+            justify-content: center;
+            padding-bottom: 10px;
+        }
+
+        .search-input {
+            padding: 8px 10px;
+            font-size: 16px;
+            /*width: flex;*/
+        }
+
+        .lot-section {
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 5px;
+            text-align: center;
+            /* cursor: pointer; */
+            user-select: none;
+        }
+
+        .lot-section h2 {
+            color: #333;
+        }
+
+        .grid {
+            display: grid;
+            grid-gap: 5px;
+            grid-template-columns: repeat(auto-fill, minmax(100px,1fr));
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        @media (min-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(10, 100px);
+            }
+        }
+
+        .spot {
+            width: 100px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            border-radius: 4px;
+            user-select: none;
+            color: #333;
+        }
+
+        .spot.available {
+            background-color: #4caf50;
+        }
+
+        .spot.reserved {
+            background-color: #f44336;
+            cursor: default;
+        }
+
+        .spot.selected {
+            background-color: #ffc107;
+        }
+
+        #reservation-section {
+            width: auto;
+            position: sticky;
+            bottom: 0;
+            background: #333;
+            padding: 10px;
+            margin-left: -20px;
+            margin-right: -20px;
+            margin-bottom: -20px;
+            text-align: center;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+
+        footer {
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        nav ul li a {
+            display: block;
+            text-align: center;
+            padding: 5px;
+            cursor: pointer;
+        }
+        h1 a {
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <h1><a onclick="userIndex()">ParkSmart</a></h1>
+    <button class="menu-toggle" aria-label="Open navigation menu">&#9776;</button>
+    <nav>
+        <ul class="nav-list">
+            <li><a onclick="userIndex()">Home</a></li>
+            <li><a onclick="userAbout()" >About</a></li>
+            <li><a onclick="userServices()">Services</a></li>
+            <li><a onclick="userAvailability()">Parking Availability</a></li>
+            <li><a id="userProfileLink" onclick="userProfile()">User Profile <span id="userProfilePlaceholder">(Loading...)</span></a></li>
+
+        </ul>
+    </nav>
+    <div class="search-container">
+        <input class="search-input" placeholder="Search for a lot...">
+    </div>
+</header>
+
+<main>
+    <section id="reservation-section">
+        <button id="reserve-button">Reserve</button>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 Online Parking. All rights not reserved.</p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

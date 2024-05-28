@@ -142,8 +142,30 @@ document.addEventListener('DOMContentLoaded', function() {
   const currentPage = window.location.pathname;
 
   // Check if the current page is 'availability.html'
-  if (currentPage.match(/availability\.html$/)) {
+  if (currentPage.match(/availability\.html$/) || currentPage.match(/userAvailability\.html$/)) {
     renderParkingLots();
     // setupSearch();
   }
 });
+
+const urlParams = new URLSearchParams(window.location.search);
+const username = urlParams.get('username');
+
+const userProfileLink = document.getElementById('userProfileLink');
+userProfileLink.textContent = "Hello, " + username;
+
+function userAbout() {
+  window.location.href = `userAbout.html?username=${encodeURIComponent(username)}`;
+}
+function userServices() {
+  window.location.href = `userServices.html?username=${encodeURIComponent(username)}`;
+}
+function userAvailability() {
+  window.location.href = `userAvailability.html?username=${encodeURIComponent(username)}`;
+}
+function userProfile() {
+  window.location.href = `userProfile.html?username=${encodeURIComponent(username)}`;
+}
+function userIndex() {
+  window.location.href = `userIndex.html?username=${encodeURIComponent(username)}`;
+}

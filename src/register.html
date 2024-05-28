@@ -90,7 +90,7 @@
 </header>
 <div class="register-container">
     <h2>Register for ParkSmart</h2>
-    <form action="index.html" method="get"> <!-- method="get" shows in URL. We want "post" -->
+    <form onsubmit="auth()"> <!-- method="get" shows in URL. We want "post" -->
         <label for="email" class="visually-hidden">email</label>
         <input type="email" id="email" placeholder="Email" required>
 
@@ -107,11 +107,16 @@
 </div>
 <script>
     function createAccount() {
-        let email = document.getElementById("email").value;
+        event.preventDefault();
+
         let username = document.getElementById("username").value;
         let password = document.getElementById("password").value;
 
-        alert("email: " + email + " username: " + username + " password: " + password);
+        alert("Username: " + username + " Password: " + password);
+
+        // Redirect with URL parameters
+        // Authenticate users here
+        window.location.href = `userIndex.html?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
     }
 </script>
 </body>

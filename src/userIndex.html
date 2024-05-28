@@ -33,46 +33,32 @@
         }
 
         nav ul li a {
-        display: block;
-        text-align: center;
-        padding: 5px;
+            display: block;
+            text-align: center;
+            padding: 5px;
             main {
                 flex: 1;
             }
+            cursor: pointer;
         }
 
     </style>
 </head>
 <body>
-    <!-- Dillon Delete before push -->
-<!--     <h1>Static Web Apps Database Connections</h1>
-<blockquote>
-    Open the console in the browser developer tools to see the API responses.
-</blockquote>
-<div>
-    <button id="list" onclick="list()">List</button>
-    <button id="get" onclick="get()">Get</button>
-    <button id="update" onclick="update()">Update</button>
-    <button id="create" onclick="create()">Create</button>
-    <button id="delete" onclick="del()">Delete</button>
-</div>
-<script>
-    // add JavaScript here
-</script> -->
-     <!-- Dillon Delete before push -->
 <div class="wrapper">
     <header>
-        <h1><a href="index.html">ParkSmart</a></h1>
+        <h1><a href="">ParkSmart</a></h1>
         <button class="menu-toggle" aria-label="Open navigation menu">&#9776;</button>
         <nav class="nav-list">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="availability.html">Parking Availability</a></li>
-                <li><a href="login.html">Login</a></li>
-            </ul>
-        </nav>
+                <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a onclick="userAbout()" >About</a></li>
+                    <li><a onclick="userServices()">Services</a></li>
+                    <li><a onclick="userAvailability()">Parking Availability</a></li>
+                    <li><a id="userProfileLink" onclick="userProfile()">User Profile <span id="userProfilePlaceholder">(Loading...)</span></a></li>
+
+                </ul>
+            </nav>
     </header>
 
     <main>
@@ -100,11 +86,11 @@
 <footer>
     <p>&copy; 2024 Online Parking. All rights not reserved.</p>
 </footer>
-    <script>
-        (async function() {
-            const { text } = await( await fetch(`/api/message`)).json();
-            document.querySelector('#name').textContent = text;
-        }());
-    </script>
+<script src="app.js">
+    (async function() {
+        const { text } = await( await fetch(`/api/message`)).json();
+        document.querySelector('#name').textContent = text;
+    }());
+</script>
 </body>
 </html>

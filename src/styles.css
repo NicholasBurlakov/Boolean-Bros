@@ -37,7 +37,7 @@ header h1 {
     text-align: center;
 }
 header h1 a{
-    padding-top: 0px;
+    padding-top: 0;
     color: white;
     text-decoration: none;
 }
@@ -59,9 +59,9 @@ nav ul li a {
     text-decoration: none;
 }
 
-.nav-list {
-  display: center;
-}
+/*.nav-list {*/
+/*  display: center;*/
+/*}*/
 
 button {
     padding: 10px 15px;
