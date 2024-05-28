@@ -1,0 +1,14 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "boolean-bros": {
+      "appLocation": "src",
+      "apiLocation": "api",
+      "outputLocation": ".",
+      "dataApiLocation": "swa-db-connections",
+      "apiLanguage": "node",
+      "apiVersion": "16",
+      "apiBuildCommand": "npm run build --if-present"
+    }
+  }
+}
