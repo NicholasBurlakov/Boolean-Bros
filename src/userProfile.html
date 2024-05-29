@@ -2,9 +2,75 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkSmart</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="256x256" href="ParkSmart.png">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        nav ul li a {
+            display: block;
+            text-align: center;
+            padding: 5px;
+            main {
+                flex: 1;
+            }
+            cursor: pointer;
+        }
+
+    </style>
 </head>
 <body>
+<div class="wrapper">
+    <header>
+        <h1><a href="">ParkSmart</a></h1>
+        <button class="menu-toggle" aria-label="Open navigation menu">&#9776;</button>
+        <nav class="nav-list">
+            <ul>
+                <li><a href="">Home</a></li>
+                <li><a onclick="userAbout()" >About</a></li>
+                <li><a onclick="userServices()">Services</a></li>
+                <li><a onclick="userAvailability()">Parking Availability</a></li>
+                <li><a id="userProfileLink" onclick="userProfile()"> <span id="userProfilePlaceholder">(Loading...)</span></a></li>
 
+            </ul>
+        </nav>
+    </header>
+</div>
+
+<main>
+    <section id="profile">
+        <h2>User Profile</h2>
+        <a id="userProfileLink">Username: </a>
+        <p></p>
+        <a href="index.html" class="btn">Logout</a>
+    </section>
+</main>
+
+<script src="app.js"></script>
 </body>
 </html>
