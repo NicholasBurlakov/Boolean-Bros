@@ -42,16 +42,23 @@
             cursor: pointer;
         }
 
+
+        section {
+            margin-top: -130px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
     </style>
 </head>
 <body>
 <div class="wrapper">
     <header>
-        <h1><a href="">ParkSmart</a></h1>
+        <h1><a onclick="userIndex()">ParkSmart</a></h1>
         <button class="menu-toggle" aria-label="Open navigation menu">&#9776;</button>
         <nav class="nav-list">
             <ul>
-                <li><a href="">Home</a></li>
+                <li><a onclick="userIndex()">Home</a></li>
                 <li><a onclick="userAbout()" >About</a></li>
                 <li><a onclick="userServices()">Services</a></li>
                 <li><a onclick="userAvailability()">Parking Availability</a></li>
@@ -65,8 +72,9 @@
 <main>
     <section id="profile">
         <h2>User Profile</h2>
-        <a id="userProfileLink">Username: </a>
-        <p></p>
+        <p>Username: <span id="username"></span></p>
+        <p>Email: <span id="email"></span></p>
+        <p>Vehicle: <span id="vehicle"></span></p>
         <a href="index.html" class="btn">Logout</a>
     </section>
 </main>

@@ -154,6 +154,9 @@ const username = urlParams.get('username');
 const userProfileLink = document.getElementById('userProfileLink');
 userProfileLink.textContent = "Hello, " + username;
 
+const username_ = document.getElementById('username');
+username_.textContent = username;
+
 function userAbout() {
   window.location.href = `userAbout.html?username=${encodeURIComponent(username)}`;
 }
