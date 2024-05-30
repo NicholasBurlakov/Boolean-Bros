@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ParkSmart</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="256x256" href="ParkSmart.png">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        nav ul li a {
+        display: block;
+        text-align: center;
+        padding: 5px;
+            main {
+                flex: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Dillon Delete before push -->
+<!--     <h1>Static Web Apps Database Connections</h1>
+<blockquote>
+    Open the console in the browser developer tools to see the API responses.
+</blockquote>
+<div>
+    <button id="list" onclick="list()">List</button>
+    <button id="get" onclick="get()">Get</button>
+    <button id="update" onclick="update()">Update</button>
+    <button id="create" onclick="create()">Create</button>
+    <button id="delete" onclick="del()">Delete</button>
+</div>
+<script>
+    // add JavaScript here
+</script> -->
+     <!-- Dillon Delete before push -->
+<div class="wrapper">
+    <header>
+        <h1><a href="index.html">ParkSmart</a></h1>
+        <button class="menu-toggle" aria-label="Open navigation menu">&#9776;</button>
+        <nav class="nav-list">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="availability.html">Parking Availability</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="parking_lots">
+            <h2>Welcome to Online Parking</h2>
+            <p>Find and reserve parking spaces hassle-free.</p>
+            <a href="availability.html" class="btn">Parking Availability</a>
+        </section>
+
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Here we talk about who we are, what our project mission is...</p>
+            <a href="about.html" class="btn">Learn More</a>
+        </section>
+
+        <section id="services">
+            <h2>Our Services</h2>
+            <p>Explore the services we offer for convenient parking.</p>
+            <a href="services.html" class="btn">Learn More</a>
+        </section>
+        <p>Testing API:...</p>
+        <p>Loading content from the API: <b id="name">...</b></p>
+    </main>
+</div>
+<footer>
+    <p>&copy; 2024 Online Parking. All rights not reserved.</p>
+</footer>
+    <script>
+        (async function() {
+            const { text } = await( await fetch(`/api/message`)).json();
+            document.querySelector('#name').textContent = text;
+        }());
+    </script>
+</body>
+</html>
