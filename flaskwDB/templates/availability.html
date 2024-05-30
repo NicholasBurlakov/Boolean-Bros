@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parking Availability</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="icon" type="image/png" sizes="256x256" href="{{ url_for('static', filename='ParkSmart.png') }}">
+  <style>
+    /* Your CSS styles here */
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="index.html">ParkSmart</a></h1>
+    <button class="menu-toggle" aria-label="Open navigation menu">&#9776;</button>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="availability.html">Parking Availability</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </nav>
+    <div class="search-container">
+      <input class="search-input" placeholder="Search for a lot...">
+    </div>
+</header>
+
+  <main>
+    <section class="grid" id="parking-grid">
+      <!-- Parking spots will be generated here -->
+    </section>
+    <section id="reservation-section">
+      <button id="reserve-button">Reserve</button>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2024 Online Parking. All rights not reserved.</p>
+</footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const parkingGrid = document.getElementById('parking-grid');
+      const reserveButton = document.getElementById('reserve-button');
+      let selectedSpot = null;
+
+      // Generate parking spots
+      for (let i = 1; i <= 50; i++) {
+        const spot = document.createElement('div');
+        spot.classList.add('spot', 'available');
+        spot.textContent = `Spot ${i}`;
+        spot.dataset.spotId = i;
+        spot.addEventListener('click', function() {
+          if (spot.classList.contains('reserved')) return;
+          if (selectedSpot) {
+            selectedSpot.classList.remove('selected');
+          }
+          selectedSpot = spot;
+          spot.classList.add('selected');
+        });
+        parkingGrid.appendChild(spot);
+      }
+
+      reserveButton.addEventListener('click', function() {
+        if (!selectedSpot) {
+          alert('Please select a spot to reserve.');
+          return;
+        }
+        const spotId = selectedSpot.dataset.spotId;
+        fetch('/reserve', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ spot_id: spotId }),
+        })
+        .then(response => response.json())
+        .then(data => {
+          alert(data.message);
+          selectedSpot.classList.remove('selected');
+          selectedSpot.classList.add('reserved');
+          selectedSpot = null;
+        });
+      });
+    });
+  </script>
+</body>
+</html>
