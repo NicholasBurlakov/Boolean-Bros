@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>ParkSmart</title>
@@ -8,14 +8,22 @@
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+<style>
+.w3-bar-block {
+  position: sticky;
+  top: 38px; /* Adjust this value to match the height of your main navigation bar */
+  width: 100%;
+  z-index: 1000;
+}
+</style>
 <body id="myPage">
 
 <!-- Sidebar on click -->
-<nav class="w3-sidebar w3-bar-block w3-white w3-card w3-animate-left w3-xxlarge" style="display:none;z-index:2" id="mySidebar">
+<nav class="w3-sidebar w3-bar-block w3-white w3-card w3-animate-left w3-xxlarge" style="display:none;z-index:2;" id="mySidebar">
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-display-topright w3-text-teal">Close
     <i class="fa fa-remove"></i>
   </a>
-  
+
 </nav>
 
 <!-- Navbar -->
@@ -30,16 +38,17 @@
   <a href="login.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Login</a>
 
   </div>
- </div> 
+ </div>
 
   <!-- Navbar on small screens -->
   <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium">
     <a href="#team" class="w3-bar-item w3-button">Team</a>
-    <a href="#services" class="w3-bar-item w3-button">Work</a>
-    <a href="#pricing" class="w3-bar-item w3-button">Price</a>
+    <a href="#services" class="w3-bar-item w3-button">Services</a>
     <a href="#contact" class="w3-bar-item w3-button">Contact</a>
+    <a href="availability.html" class="w3-bar-item w3-button">Parking Availability</a>
+    <a href="login.html" class="w3-bar-item w3-button">Login</a>
   </div>
-</div>
+
 
 <!-- Image Header -->
 <div class="w3-display-container w3-animate-opacity">
@@ -96,7 +105,7 @@
 
 <div class="w3-card w3-white">
   <div class="w3-container">
-    <header> 
+    <header>
       <h3>Step 1</h3>
     </header>
   <p>Click on Parking Avalibility</p>
@@ -107,7 +116,7 @@
 <div class="w3-quarter">
 <div class="w3-card w3-white">
   <div class="w3-container">
-    <header> 
+    <header>
       <h3>Step 2</h3>
     </header>
   <p>Find your desired lot</p>
@@ -118,9 +127,9 @@
 <div class="w3-quarter">
 <div class="w3-card w3-white">
   <div class="w3-container">
-    <header> 
+    <header>
       <h3>Step 3</h3>
-    </header>  
+    </header>
   <p>Choose your spot and click Reserve</p>
   </div>
   </div>
@@ -128,11 +137,6 @@
 
 </div>
 
-<!-- Container -->
-<div class="w3-container" style="position:relative">
-  <a onclick="w3_open()" class="w3-button w3-xlarge w3-circle w3-teal"
-  style="position:absolute;top:-28px;right:24px">+</a>
-</div>
 <!-- Contact Container -->
 <div class="w3-container w3-padding-64 w3-theme-l5" id="contact">
   <div class="w3-row">
@@ -146,18 +150,18 @@
     </div>
     <div class="w3-col m7">
       <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="/action_page.php" target="_blank">
-      <div class="w3-section">      
+      <div class="w3-section">
         <label>Name</label>
         <input class="w3-input" type="text" name="Name" required>
       </div>
-      <div class="w3-section">      
+      <div class="w3-section">
         <label>Email</label>
         <input class="w3-input" type="text" name="Email" required>
       </div>
-      <div class="w3-section">      
+      <div class="w3-section">
         <label>Message</label>
         <input class="w3-input" type="text" name="Message" required>
-      </div>  
+      </div>
       <button type="submit" class="w3-button w3-right w3-theme">Send</button>
       </form>
     </div>
@@ -169,10 +173,10 @@
 
 <!-- Footer -->
 <footer class="w3-container w3-padding-32 w3-theme-d1 w3-center">
+  <p>@2024 Online Parking. All rights not reserved.</p>
   <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-
   <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
-    <span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>   
+    <span class="w3-text w3-padding w3-teal w3-hide-small">Go To Top</span>
     <a class="w3-button w3-theme" href="#myPage"><span class="w3-xlarge">
     <i class="fa fa-chevron-circle-up"></i></span></a>
   </div>
@@ -197,7 +201,7 @@ function openNav() {
   var x = document.getElementById("navDemo");
   if (x.className.indexOf("w3-show") == -1) {
     x.className += " w3-show";
-  } else { 
+  } else {
     x.className = x.className.replace(" w3-show", "");
   }
 }
