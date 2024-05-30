@@ -14,6 +14,9 @@ def init_db():
     conn.commit()
     conn.close()
 
+@app.route('/')
+def home():
+    return render_template('index.html')
 @app.route('/index.html')
 def index():
     return render_template('index.html')
@@ -41,7 +44,7 @@ def reserve():
     return jsonify({"message": "Reservation successful"}), 200
 
 
-@app.route('/participants.html') 
+@app.route('/database.html')
 def participants(): 
     connect = sqlite3.connect('parking.db') 
     cursor = connect.cursor() 
