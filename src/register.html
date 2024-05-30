@@ -90,7 +90,7 @@
 </header>
 <div class="register-container">
     <h2>Register for ParkSmart</h2>
-    <form onsubmit="auth()"> <!-- method="get" shows in URL. We want "post" -->
+    <form onsubmit="createAccount()"> <!-- method="get" shows in URL. We want "post" -->
         <label for="email" class="visually-hidden">email</label>
         <input type="email" id="email" placeholder="Email" required>
 
@@ -100,7 +100,7 @@
         <label for="password" class="visually-hidden">Username</label>
         <input type="password" id="password" placeholder="Password" required>
 
-        <button type="submit" onclick="createAccount()">Register</button>
+        <button type="submit">Register</button>
         <a href="login.html">Already have an account? Login</a>
     </form>
 
