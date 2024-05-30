@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - ParkSmart</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" sizes="256x256" href="ParkSmart.png">
     <style>
@@ -74,19 +77,18 @@
     </style>
 </head>
 <body>
-<header>
-    <h1><a href="index.html">ParkSmart</a></h1>
     <button class="menu-toggle" aria-label="Open navigation menu">&#9776;</button>
-    <nav class="nav-list">
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="availability.html">Parking Availability</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
-    </nav>
-</header>
+    <div class="w3-top">
+        <div class="w3-bar w3-theme-d2 w3-left-align">
+         <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-hover-white w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
+         <a href="index.html" class="w3-bar-item w3-button w3-teal"><i class="fa fa-home"></i></a>
+         <a href="index.html#team" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Team</a>
+         <a href="index.html#services" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Services</a>
+         <a href="index.html#contact" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
+         <a href="availability.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Parking Avalibility</a>
+         <a href="login.html" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Login</a>
+         </div>
+        </div> 
 
 <div class="login-container">
     <h2>Login to ParkSmart</h2>
