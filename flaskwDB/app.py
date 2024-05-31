@@ -1,7 +1,15 @@
+import os
+
 from flask import Flask, render_template, request, jsonify
 import sqlite3
 
 app = Flask(__name__)
+
+#import images
+IMAGES_FOLDER = os.path.join('static', 'images')
+app.config['UPLOAD_FOLDER'] = IMAGES_FOLDER
+
+
 
 # Initialize SQLite database
 def init_db():
@@ -16,10 +24,12 @@ def init_db():
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'empty_parking.jpg')
+    return render_template("index.html", empty_parking=full_filename)
 @app.route('/index.html')
 def index():
-    return render_template('index.html')
+    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'empty_parking.jpg')
+    return render_template("index.html", empty_parking=full_filename)
 
 @app.route('/availability.html')
 def avl():
