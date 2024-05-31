@@ -8,18 +8,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>Reservations</h1>
+        <h1>Database Tables</h1>
+
+        <!-- Display data from each table -->
+        {% for table_name, columns, data in tables %}
+        <h2>{{ table_name }}</h2>
         <table class="table">
             <thead>
                 <tr>
-                    <!-- Dynamically generate table headers -->
                     {% for column in columns %}
                     <th>{{ column }}</th>
                     {% endfor %}
                 </tr>
             </thead>
             <tbody>
-                <!-- Dynamically generate table rows -->
                 {% for row in data %}
                 <tr>
                     {% for item in row %}
@@ -29,6 +31,8 @@
                 {% endfor %}
             </tbody>
         </table>
+        <br><br>
+        {% endfor %}
     </div>
 </body>
 </html>

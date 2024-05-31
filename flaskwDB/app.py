@@ -14,12 +14,62 @@ app.config['UPLOAD_FOLDER'] = IMAGES_FOLDER
 
 # Initialize SQLite database
 def init_db():
-    engine = create_engine('sqlite:///parking.db')
     conn = sqlite3.connect('parking.db')
     cursor = conn.cursor()
-    cursor.execute('''CREATE TABLE IF NOT EXISTS reservations (
-                        spot_id INTEGER PRIMARY KEY,
-                        reserved INTEGER)''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS Reservations (
+                    ReservationID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    SpotID INTEGER NOT NULL,
+                    ParkingLotID INTEGER NOT NULL,
+                    VehicleID INTEGER NOT NULL,
+                    StartTime DATETIME NOT NULL,
+                    EndTime DATETIME NOT NULL,
+                    FOREIGN KEY (SpotID) REFERENCES ParkingSpot(SpotID),
+                    FOREIGN KEY (ParkingLotID) REFERENCES ParkingLot(ParkingLotID),
+                    FOREIGN KEY (VehicleID) REFERENCES Vehicle(VehicleID));
+                    ''')
+
+    cursor.execute('''CREATE TABLE IF NOT EXISTS ParkingLot (
+    ParkingLotID INTEGER PRIMARY KEY AUTOINCREMENT,
+    OwnerID INTEGER NOT NULL,
+    Name TEXT NOT NULL,
+    Location TEXT NOT NULL,
+    Capacity INTEGER NOT NULL,
+    FOREIGN KEY (OwnerID) REFERENCES Owner(OwnerID)
+);''')
+
+    cursor.execute('''CREATE TABLE IF NOT EXISTS ParkingSpot (
+    SpotID INTEGER PRIMARY KEY AUTOINCREMENT,
+    ParkingLotID INTEGER NOT NULL,
+    SpotNumber INTEGER NOT NULL,
+    IsAvailable BOOLEAN NOT NULL,
+    FOREIGN KEY (ParkingLotID) REFERENCES ParkingLot(ParkingLotID)
+);''')
+
+    cursor.execute('''CREATE TABLE IF NOT EXISTS Vehicle (
+    VehicleID INTEGER PRIMARY KEY AUTOINCREMENT,
+    UserID INTEGER NOT NULL,
+    LicensePlate TEXT NOT NULL UNIQUE,
+    State TEXT NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES RegisteredUser(UserID)
+);''')
+
+    cursor.execute('''CREATE TABLE IF NOT EXISTS RegisteredUser (
+    UserID INTEGER PRIMARY KEY AUTOINCREMENT,
+    FirstName TEXT NOT NULL,
+    LastName TEXT NOT NULL,
+    Email TEXT NOT NULL UNIQUE,
+    Password TEXT NOT NULL
+);''')
+
+    cursor.execute('''CREATE TABLE IF NOT EXISTS Owner (
+    OwnerID INTEGER PRIMARY KEY AUTOINCREMENT,
+    FirstName TEXT NOT NULL,
+    LastName TEXT NOT NULL,
+    Email TEXT NOT NULL UNIQUE,
+    PhoneNumber TEXT NOT NULL
+);''')
+
+    # cursor.execute('''DROP TABLE IF EXISTS reservations''')
     conn.commit()
     conn.close()
 
@@ -57,16 +107,21 @@ def reserve():
 
 @app.route('/database.html')
 def database():
+    tables = []
+    table_names = ['Reservations', 'ParkingLot', 'ParkingSpot', 'Vehicle', 'RegisteredUser', 'Owner']
+
     connect = sqlite3.connect('parking.db')
     cursor = connect.cursor()
-    cursor.execute('SELECT * FROM reservations')
 
-    data = cursor.fetchall()
-    # Fetching column names from the cursor's description attribute
-    column_names = [description[0] for description in cursor.description]
+    for table_name in table_names:
+        cursor.execute(f'SELECT * FROM {table_name}')
+        data = cursor.fetchall()
+        # Fetching column names from the cursor's description attribute
+        column_names = [description[0] for description in cursor.description]
+        tables.append((table_name, column_names, data))
 
     connect.close()
-    return render_template("database.html", data=data, columns=column_names)
+    return render_template("database.html", tables=tables)
 
 
 if __name__ == '__main__':
