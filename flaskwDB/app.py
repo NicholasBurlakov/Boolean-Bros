@@ -2,6 +2,7 @@ import os
 
 from flask import Flask, render_template, request, jsonify
 import sqlite3
+from sqlalchemy import create_engine
 
 app = Flask(__name__)
 
@@ -13,11 +14,11 @@ app.config['UPLOAD_FOLDER'] = IMAGES_FOLDER
 
 # Initialize SQLite database
 def init_db():
+    engine = create_engine('sqlite:///parking.db')
     conn = sqlite3.connect('parking.db')
     cursor = conn.cursor()
     cursor.execute('''CREATE TABLE IF NOT EXISTS reservations (
-                        id INTEGER PRIMARY KEY,
-                        spot_id INTEGER,
+                        spot_id INTEGER PRIMARY KEY,
                         reserved INTEGER)''')
     conn.commit()
     conn.close()
@@ -55,13 +56,18 @@ def reserve():
 
 
 @app.route('/database.html')
-def participants(): 
-    connect = sqlite3.connect('parking.db') 
-    cursor = connect.cursor() 
-    cursor.execute('SELECT * FROM reservations') 
+def database():
+    connect = sqlite3.connect('parking.db')
+    cursor = connect.cursor()
+    cursor.execute('SELECT * FROM reservations')
 
-    data = cursor.fetchall() 
-    return render_template("participants.html", data=data) 
+    data = cursor.fetchall()
+    # Fetching column names from the cursor's description attribute
+    column_names = [description[0] for description in cursor.description]
+
+    connect.close()
+    return render_template("database.html", data=data, columns=column_names)
+
 
 if __name__ == '__main__':
     init_db()
