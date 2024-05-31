@@ -1,3 +1,4 @@
+import datetime
 import os
 
 from flask import Flask, render_template, request, jsonify
@@ -10,8 +11,6 @@ app = Flask(__name__)
 IMAGES_FOLDER = os.path.join('static', 'images')
 app.config['UPLOAD_FOLDER'] = IMAGES_FOLDER
 
-
-
 # Initialize SQLite database
 def init_db():
     conn = sqlite3.connect('parking.db')
@@ -19,10 +18,10 @@ def init_db():
     cursor.execute('''CREATE TABLE IF NOT EXISTS Reservations (
                     ReservationID INTEGER PRIMARY KEY AUTOINCREMENT,
                     SpotID INTEGER NOT NULL,
-                    ParkingLotID INTEGER NOT NULL,
-                    VehicleID INTEGER NOT NULL,
-                    StartTime DATETIME NOT NULL,
-                    EndTime DATETIME NOT NULL,
+                    ParkingLotID INTEGER,
+                    VehicleID INTEGER,
+                    StartTime DATETIME,
+                    EndTime DATETIME,
                     FOREIGN KEY (SpotID) REFERENCES ParkingSpot(SpotID),
                     FOREIGN KEY (ParkingLotID) REFERENCES ParkingLot(ParkingLotID),
                     FOREIGN KEY (VehicleID) REFERENCES Vehicle(VehicleID));
@@ -95,14 +94,25 @@ def reg():
     return render_template('register.html')
 
 @app.route('/reserve', methods=['POST'])
+@app.route('/reserve', methods=['POST'])
 def reserve():
-    spot_id = request.json.get('spot_id')
+    data = request.json
+    spot_id = data.get('spot_id')
+    parking_lot_id = data.get('parking_lot_id', 1)  # Assuming a default parking lot ID
+    vehicle_id = data.get('vehicle_id', 1)  # Assuming a default vehicle ID
+    start_time = data.get('start_time', '2024-01-01 00:00:00')  # Default start time
+    end_time = data.get('end_time', '2024-12-31 00:00:00')  # Default end time
+
     conn = sqlite3.connect('parking.db')
     cursor = conn.cursor()
-    cursor.execute('INSERT INTO reservations (spot_id, reserved) VALUES (?, ?)', (spot_id, 1))
+    cursor.execute('''INSERT INTO reservations (SpotID, ParkingLotID, VehicleID, StartTime, EndTime) 
+                      VALUES (?, ?, ?, ?, ?)''',
+                      (spot_id, parking_lot_id, vehicle_id, start_time, end_time))
     conn.commit()
     conn.close()
+
     return jsonify({"message": "Reservation successful"}), 200
+
 
 
 @app.route('/database.html')
