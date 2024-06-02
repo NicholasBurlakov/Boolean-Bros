@@ -1,10 +1,11 @@
 import datetime
 import os
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
 import sqlite3
 
 app = Flask(__name__)
+app.secret_key = "Boolean_Bros_Rule"
 
 #import images
 IMAGES_FOLDER = os.path.join('static', 'images')
@@ -66,31 +67,49 @@ def init_db():
     PhoneNumber TEXT NOT NULL
 );''')
 
-    # cursor.execute('''INSERT INTO RegisteredUser
-    # (Username, Email, Password) VALUES ('Caleb', 'cstewart15@ewu.edu', 'a');''')
+
     conn.commit()
     conn.close()
 
 @app.route('/')
 def home():
     full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'empty_parking.jpg')
-    return render_template("index.html", empty_parking=full_filename)
+    if 'username' in session:
+        return render_template("userHome", empty_parking=full_filename, username=session['username'])
+    else:
+        return render_template("index.html", empty_parking=full_filename)
 @app.route('/index.html')
 def index():
-    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'empty_parking.jpg')
-    return render_template("index.html", empty_parking=full_filename)
+    return home()
 
 @app.route('/availability.html')
 def avl():
-    return render_template('availability.html')
+    if 'username' in session:
+        return render_template('userAvailability.html', username=session['username'])
+    else:
+        return render_template('availability.html')
 
 @app.route('/login.html')
 def log():
     return render_template('login.html')
 
 @app.route('/register.html')
-def reg():
+def register():
     return render_template('register.html')
+
+@app.route('/userHome')
+def userHome():
+    return home()
+
+
+@app.route('/userProfile.html')
+def userProfile():
+    conn = sqlite3.connect('parking.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT Email FROM RegisteredUser WHERE Username = ?", (session['username'],))
+    session['email'] = cursor.fetchone()[0]
+
+    return render_template("userProfile.html", username=session['username'], email=session['email'])
 
 
 @app.route('/reserve', methods=['POST'])
@@ -106,7 +125,7 @@ def reserve():
     cursor = conn.cursor()
     cursor.execute('''INSERT INTO reservations (SpotID, ParkingLotID, VehicleID, StartTime, EndTime) 
                       VALUES (?, ?, ?, ?, ?)''',
-                      (spot_id, parking_lot_id, vehicle_id, start_time, end_time))
+            (spot_id, parking_lot_id, vehicle_id, start_time, end_time))
     conn.commit()
     conn.close()
 
@@ -130,10 +149,16 @@ def database():
     connect.close()
     return render_template("database.html", tables=tables)
 
-@app.route('/login.html', methods=["GET", "POST"])
+@app.route('/login.html', methods=["POST"])
 def loginUser():
     #Ensures this can only be accessed through POST request
     if request.method == "POST":
+
+        print(session)
+        #If user is already logged in
+        if 'username' in session:
+            return render_template("login.html", error_message="User already logged in")
+
         conn = sqlite3.connect('parking.db')
         cursor = conn.cursor()
 
@@ -149,8 +174,9 @@ def loginUser():
         #If username and password are correct...
         if len(result) > 0:
             #Redirect to loggedin home page
+            session['username'] = username
             full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'empty_parking.jpg')
-            return render_template("index.html", empty_parking=full_filename)
+            return render_template("userHome", empty_parking=full_filename, username=username)
         #If username or password are incorrect...
         else:
             return render_template("login.html", error_message="Invalid username or password")
@@ -158,7 +184,7 @@ def loginUser():
     #If not POST request
     return render_template("login.html")
 
-@app.route('/register.html', methods=["GET", "POST"])
+@app.route('/register.html', methods=["POST"])
 def registerUser():
     #Ensures this can only be accessed through POST request
     if request.method == "POST":
@@ -178,6 +204,7 @@ def registerUser():
 
         #If username or email already exist...
         if len(result) > 0:
+            session['username'] = username
             conn.close()
             return render_template("register.html", error_message="Username or email already exists")
         #If username or email are unique insert into database
@@ -185,11 +212,17 @@ def registerUser():
             cursor.execute("INSERT INTO RegisteredUser (Username, Email, Password) VALUES (?, ?, ?)", (username, email, password))
             conn.commit()
 
+            #Redirect to loggedin home page
+            full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'empty_parking.jpg')
+            return render_template("userHome", empty_parking=full_filename, username=username)
+
         conn.close()
 
-    #Redirect to loggedin home page
-    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'empty_parking.jpg')
-    return render_template("index.html", empty_parking=full_filename)
+
+@app.route('/logout', methods=["POST"])
+def logout():
+    session.pop('username', None)
+    return home()
 
 
 if __name__ == '__main__':
