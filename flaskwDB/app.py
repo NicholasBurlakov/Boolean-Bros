@@ -3,7 +3,6 @@ import os
 
 from flask import Flask, render_template, request, jsonify
 import sqlite3
-from sqlalchemy import create_engine
 
 app = Flask(__name__)
 
@@ -54,8 +53,7 @@ def init_db():
 
     cursor.execute('''CREATE TABLE IF NOT EXISTS RegisteredUser (
     UserID INTEGER PRIMARY KEY AUTOINCREMENT,
-    FirstName TEXT NOT NULL,
-    LastName TEXT NOT NULL,
+    Username TEXT NOT NULL UNIQUE,
     Email TEXT NOT NULL UNIQUE,
     Password TEXT NOT NULL
 );''')
@@ -68,7 +66,8 @@ def init_db():
     PhoneNumber TEXT NOT NULL
 );''')
 
-    # cursor.execute('''DROP TABLE IF EXISTS reservations''')
+    # cursor.execute('''INSERT INTO RegisteredUser
+    # (Username, Email, Password) VALUES ('Caleb', 'cstewart15@ewu.edu', 'a');''')
     conn.commit()
     conn.close()
 
@@ -93,7 +92,7 @@ def log():
 def reg():
     return render_template('register.html')
 
-@app.route('/reserve', methods=['POST'])
+
 @app.route('/reserve', methods=['POST'])
 def reserve():
     data = request.json
@@ -113,8 +112,6 @@ def reserve():
 
     return jsonify({"message": "Reservation successful"}), 200
 
-
-
 @app.route('/database.html')
 def database():
     tables = []
@@ -132,6 +129,65 @@ def database():
 
     connect.close()
     return render_template("database.html", tables=tables)
+
+@app.route('/login.html', methods=["GET", "POST"])
+def loginUser():
+    #Ensures this can only be accessed through POST request
+    if request.method == "POST":
+        conn = sqlite3.connect('parking.db')
+        cursor = conn.cursor()
+
+        # From HTML
+        username = request.form['username']
+        password = request.form['password']
+
+        #SQL
+        cursor.execute("SELECT Username, Password FROM RegisteredUser WHERE Username = ? AND Password = ?", (username, password))
+        result = cursor.fetchall()
+        conn.close()
+
+        #If username and password are correct...
+        if len(result) > 0:
+            #Redirect to loggedin home page
+            return render_template("index.html", method="POST")
+        #If username or password are incorrect...
+        else:
+            return render_template("login.html", error_message="Invalid username or password")
+
+    #If not POST request
+    return render_template("login.html")
+
+@app.route('/register.html', methods=["GET", "POST"])
+def registerUser():
+    #Ensures this can only be accessed through POST request
+    if request.method == "POST":
+        conn = sqlite3.connect('parking.db')
+        cursor = conn.cursor()
+
+        # From HTML
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        print(username, email, password)
+
+        #SQL
+        #Checks if username or email already exists
+        cursor.execute("SELECT Username, Email FROM RegisteredUser WHERE Username = ? and Email = ?", (username, email))
+        result = cursor.fetchall()
+
+        #If username or email already exist...
+        if len(result) > 0:
+            conn.close()
+            return render_template("register.html", error_message="Username or email already exists")
+        #If username or email are unique insert into database
+        else:
+            cursor.execute("INSERT INTO RegisteredUser (Username, Email, Password) VALUES (?, ?, ?)", (username, email, password))
+            conn.commit()
+
+        conn.close()
+
+    #Redirect to loggedin home page
+    return render_template("index.html")
 
 
 if __name__ == '__main__':

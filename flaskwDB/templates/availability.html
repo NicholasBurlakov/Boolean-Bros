@@ -13,16 +13,18 @@
 
     .search-container {
       flex: 1;
-      display: flex;
+      display: inline-block;
       padding-top: 45px;
       justify-content: center;
       padding-bottom: 10px;
+      text-align: center;
     }
 
     .search-input {
       padding: 8px 10px;
       font-size: 16px;
-      width: flex;
+      width: 50%;
+
     }
 
     .lot-section {
@@ -58,56 +60,56 @@
 
 }
 
-    .spot {
-      width: 100px;
-      height: 150px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-weight: bold;
-      border-radius: 4px;
-      user-select: none;
-      color: #333;
-    }
+  .spot {
+    width: 100px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+    user-select: none;
+    color: #333;
+  }
 
-    .spot.available {
-      background-color: #4caf50;
-    }
+  .spot.available {
+    background-color: #4caf50;
+  }
 
-    .spot.reserved {
-      background-color: #f44336;
-      cursor: default;
-    }
+  .spot.reserved {
+    background-color: #f44336;
+    cursor: default;
+  }
 
-    .spot.selected {
-      background-color: #ffc107;
-    }
+  .spot.selected {
+    background-color: #ffc107;
+  }
 
-    #reservation-section {
-      width: auto;
-      position: sticky;
-      bottom: 0;
-      background: #030303;
-      padding: 10px;
-      margin-left: -20px;
-      margin-right: -20px;
-      margin-bottom: -20px;
-      text-align: center;
-      border-radius: 0;
-    }
+  #reservation-section {
+    width: auto;
+    position: sticky;
+    bottom: 0;
+    background: #030303;
+    padding: 10px;
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: -20px;
+    text-align: center;
+    border-radius: 0;
+  }
 
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
+  html, body {
+    height: 100%;
+    margin: 0;
+  }
 
-    nav ul li a {
-      display: block;
-      text-align: center;
-      padding: 5px;
-    }
-  </style>
+  nav ul li a {
+    display: block;
+    text-align: center;
+    padding: 5px;
+  }
+</style>
 </head>
 <body>
 
