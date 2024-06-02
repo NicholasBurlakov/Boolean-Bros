@@ -149,7 +149,8 @@ def loginUser():
         #If username and password are correct...
         if len(result) > 0:
             #Redirect to loggedin home page
-            return render_template("index.html", method="POST")
+            full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'empty_parking.jpg')
+            return render_template("index.html", empty_parking=full_filename)
         #If username or password are incorrect...
         else:
             return render_template("login.html", error_message="Invalid username or password")
@@ -187,7 +188,8 @@ def registerUser():
         conn.close()
 
     #Redirect to loggedin home page
-    return render_template("index.html")
+    full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'empty_parking.jpg')
+    return render_template("index.html", empty_parking=full_filename)
 
 
 if __name__ == '__main__':
