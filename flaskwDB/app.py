@@ -48,7 +48,8 @@ def init_db():
     VehicleID INTEGER PRIMARY KEY AUTOINCREMENT,
     UserID INTEGER NOT NULL,
     LicensePlate TEXT NOT NULL UNIQUE,
-    State TEXT NOT NULL,
+    VehicleType TEXT NOT NULL,
+    VehicleColor TEXT NOT NULL,
     FOREIGN KEY (UserID) REFERENCES RegisteredUser(UserID)
 );''')
 
@@ -195,7 +196,9 @@ def registerUser():
         username = request.form['username']
         email = request.form['email']
         password = request.form['password']
-        print(username, email, password)
+        vehicle = request.form['vehicle-type']
+        license = request.form['lic']
+        vehColor = request.form['color']
 
         #SQL
         #Checks if username or email already exists
@@ -206,18 +209,29 @@ def registerUser():
         if len(result) > 0:
             conn.close()
             return render_template("register.html", error_message="Username or email already exists")
+
         #If username or email are unique insert into database
         else:
             session['username'] = username
 
             cursor.execute("INSERT INTO RegisteredUser (Username, Email, Password) VALUES (?, ?, ?)", (username, email, password))
-            conn.commit()
 
+
+            cursor.execute("SELECT UserID FROM RegisteredUser WHERE Username = ? AND Email = ?", (username, email))
+            user_id = cursor.fetchone()[0]
+
+            # Insert into Vehicles
+            cursor.execute("INSERT INTO Vehicle (UserID, LicensePlate, VehicleType, VehicleColor) VALUES (?, ?, ?, ?)",
+                           (user_id, license, vehicle, vehColor))
+
+            conn.commit()
+            conn.close()
+            
             #Redirect to loggedin home page
             full_filename = os.path.join(app.config['UPLOAD_FOLDER'], 'empty_parking.jpg')
             return render_template("userHome", empty_parking=full_filename, username=username)
 
-        conn.close()
+
 
 
 @app.route('/logout', methods=["POST"])
