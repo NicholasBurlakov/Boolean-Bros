@@ -204,11 +204,12 @@ def registerUser():
 
         #If username or email already exist...
         if len(result) > 0:
-            session['username'] = username
             conn.close()
             return render_template("register.html", error_message="Username or email already exists")
         #If username or email are unique insert into database
         else:
+            session['username'] = username
+
             cursor.execute("INSERT INTO RegisteredUser (Username, Email, Password) VALUES (?, ?, ?)", (username, email, password))
             conn.commit()
 
