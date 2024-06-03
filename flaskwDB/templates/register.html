@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" sizes="256x256" href="ParkSmart.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
@@ -20,7 +19,7 @@
             width: 100%;
             max-width: 300px;
             text-align: center;
-            margin: 50px auto auto;
+            margin: 150px auto auto;
         }
 
         .register-container h2 {
@@ -74,7 +73,7 @@
             clip: rect(0, 0, 0, 0);
             border: 0;
         }
-        .w3-bar-block {
+    .w3-bar-block {
   position: sticky;
   top: 38px;
   width: 100%;
@@ -108,8 +107,11 @@
   </div>
 
 <div class="register-container">
-    <h3>Register for ParkSmart</h3>
-    <form onsubmit="createAccount()">
+    <h2>Register for ParkSmart</h2>
+    {% if error_message %}
+    <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    <form method="POST">
         <label for="email" class="visually-hidden">Email</label>
         <input type="email" id="email" name="email" placeholder="Email" required>
         <label for="username" class="visually-hidden">Username</label>
@@ -122,10 +124,10 @@
 </div>
 <script>
     function w3_open() {
-  var x = document.getElementById("mySidebar");
-  x.style.width = "300px";
-  x.style.paddingTop = "10%";
-  x.style.display = "block";
+      var x = document.getElementById("mySidebar");
+      x.style.width = "300px";
+      x.style.paddingTop = "10%";
+      x.style.display = "block";
 }
 
 // Close side navigation
@@ -142,18 +144,18 @@ function openNav() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
-    function createAccount() {
-        event.preventDefault();
+function createAccount() {
+    event.preventDefault();
 
-        let username = document.getElementById("username").value;
-        let password = document.getElementById("password").value;
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
 
-        alert("Username: " + username + " Password: " + password);
+    alert("Username: " + username + " Password: " + password);
 
-        // Redirect with URL parameters
-        // Authenticate users here
-        window.location.href = `userIndex.html?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
-    }
+    // Redirect with URL parameters
+    // Authenticate users here
+    window.location.href = `userIndex.html?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+}
 </script>
 </body>
 </html>
