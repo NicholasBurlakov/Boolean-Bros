@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Black">
-<<<<<<< Updated upstream
     <option name="sdkName" value="Python 3.9" />
   </component>
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.9" project-jdk-type="Python SDK" />
-=======
-    <option name="sdkName" value="Python 3.11 (ParkSmartApp)" />
-  </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.11 (ParkSmartApp)" project-jdk-type="Python SDK" />
->>>>>>> Stashed changes
 </project>

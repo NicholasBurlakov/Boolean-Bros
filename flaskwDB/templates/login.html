@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" sizes="256x256" href="ParkSmart.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
@@ -19,7 +20,7 @@
             width: 100%;
             max-width: 300px;
             text-align: center;
-            margin: 150px auto auto;
+            margin: 50px auto auto;
         }
 
         .login-container h2 {
@@ -110,10 +111,7 @@
 
 <div class="login-container">
     <h2>Login to ParkSmart</h2>
-    {% if error_message %}
-    <p style="color: red;">{{ error_message }}</p>
-    {% endif %}
-    <form method="POST" >
+    <form onsubmit="auth()">
         <label for="username" class="visually-hidden">Username</label>
         <input type="text" id="username" name="username" placeholder="Username" required>
         <label for="password" class="visually-hidden">Password</label>
@@ -144,6 +142,18 @@ function openNav() {
     x.className = x.className.replace(" w3-show", "");
   }
 }
+    function auth() {
+        event.preventDefault();
+
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+
+        alert("Username: " + username + " Password: " + password);
+
+        // Redirect with URL parameters
+        // Authenticate users here
+        window.location.href = `userIndex.html?username=${encodeURIComponent(username)}`;
+    }
 </script>
 </body>
 </html>
