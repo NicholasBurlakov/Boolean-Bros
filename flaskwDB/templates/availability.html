@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
   <link rel="icon" type="image/png" sizes="256x256" href="ParkSmart.png">
   <style>
-
     .search-container {
       flex: 1;
       display: inline-block;
@@ -24,7 +23,6 @@
       padding: 8px 10px;
       font-size: 16px;
       width: 50%;
-
     }
 
     .lot-section {
@@ -52,75 +50,73 @@
         grid-template-columns: repeat(10, 100px);
       }
     }
-.w3-bar-block {
-  position: sticky;
-  top: 38px;
-  width: 100%;
-  z-index: 1000;
 
-}
+    .w3-bar-block {
+      position: sticky;
+      top: 38px;
+      width: 100%;
+      z-index: 1000;
+    }
 
-  .spot {
-    width: 100px;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 4px;
-    user-select: none;
-    color: #333;
-  }
+    .spot {
+      width: 100px;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 4px;
+      user-select: none;
+      color: #333;
+    }
 
-  .spot.available {
-    background-color: #4caf50;
-  }
+    .spot.available {
+      background-color: #4caf50;
+    }
 
-  .spot.reserved {
-    background-color: #f44336;
-    cursor: default;
-  }
+    .spot.reserved {
+      background-color: #f44336;
+      cursor: default;
+    }
 
-  .spot.selected {
-    background-color: #ffc107;
-  }
+    .spot.selected {
+      background-color: #ffc107;
+    }
 
-  #reservation-section {
-    width: auto;
-    position: sticky;
-    bottom: 0;
-    background: #030303;
-    padding: 10px;
-    margin-left: -20px;
-    margin-right: -20px;
-    margin-bottom: -20px;
-    text-align: center;
-    border-radius: 0;
-  }
+    #reservation-section {
+      width: auto;
+      position: sticky;
+      bottom: 0;
+      background: #030303;
+      padding: 10px;
+      margin-left: -20px;
+      margin-right: -20px;
+      margin-bottom: -20px;
+      text-align: center;
+      border-radius: 0;
+    }
 
-  html, body {
-    height: 100%;
-    margin: 0;
-  }
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
 
-  nav ul li a {
-    display: block;
-    text-align: center;
-    padding: 5px;
-  }
-</style>
+    nav ul li a {
+      display: block;
+      text-align: center;
+      padding: 5px;
+    }
+  </style>
 </head>
 <body>
-
-<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium">
-  <a href="index.html#team" class="w3-bar-item w3-button">Team</a>
-  <a href="index.html#services" class="w3-bar-item w3-button">Services</a>
-  <a href="index.html#contact" class="w3-bar-item w3-button">Contact</a>
-  <a href="availability.html" class="w3-bar-item w3-button">Parking Availability</a>
-  <a href="login.html" class="w3-bar-item w3-button">Login</a>
-</div>
-
+  <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium">
+    <a href="index.html#team" class="w3-bar-item w3-button">Team</a>
+    <a href="index.html#services" class="w3-bar-item w3-button">Services</a>
+    <a href="index.html#contact" class="w3-bar-item w3-button">Contact</a>
+    <a href="availability.html" class="w3-bar-item w3-button">Parking Availability</a>
+    <a href="login.html" class="w3-bar-item w3-button">Login</a>
+  </div>
   <div class="w3-top">
     <div class="w3-bar w3-theme-d2 w3-left-align">
       <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-hover-white w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
@@ -141,7 +137,6 @@
       <button id="reserve-button" class="w3-button w3-teal">Reserve</button>
     </section>
   </main>
-  <!-- Footer -->
   <footer class="w3-container w3-theme-d1 w3-center">
     <p>@2024 Online Parking. All rights not reserved.</p>
     <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
@@ -150,69 +145,46 @@
       <a class="w3-button w3-theme" href="availability.html"><span class="w3-xlarge"><i class="fa fa-chevron-circle-up"></i></span></a>
     </div>
   </footer>
+<<<<<<< Updated upstream
+  <script src="../static/app.js"></script>
+
+
+=======
   <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const parkingGrid = document.getElementById('parking-grid');
-  const reserveButton = document.getElementById('reserve-button');
-  let selectedSpot = null;
+    document.addEventListener('DOMContentLoaded', function() {
+      const parkingGrid = document.getElementById('parking-grid');
+      const reserveButton = document.getElementById('reserve-button');
+      let selectedSpot = null;
 
-  // Generate parking spots
-  for (let i = 1; i <= 50; i++) {
-    const spot = document.createElement('div');
-    spot.classList.add('spot', 'available');
-    spot.textContent = `Spot ${i}`;
-    spot.dataset.spotId = i;
-    spot.addEventListener('click', function() {
-      if (spot.classList.contains('reserved')) return;
-      if (selectedSpot) {
-        selectedSpot.classList.remove('selected');
+      // Generate parking spots
+      for (let i = 1; i <= 50; i++) {
+        const spot = document.createElement('div');
+        spot.classList.add('spot', 'available');
+        spot.textContent = `Spot ${i}`;
+        spot.dataset.spotId = i;
+        spot.addEventListener('click', function() {
+          if (spot.classList.contains('reserved')) return;
+          if (selectedSpot) {
+            selectedSpot.classList.remove('selected');
+          }
+          selectedSpot = spot;
+          spot.classList.add('selected');
+        });
+        parkingGrid.appendChild(spot);
       }
-      selectedSpot = spot;
-      spot.classList.add('selected');
+
+      reserveButton.addEventListener('click', function() {
+        if (!selectedSpot) {
+          alert('Please select a spot to reserve.');
+          return;
+        }
+
+        const spotId = selectedSpot.dataset.spotId;
+        localStorage.setItem('selectedSpotId', spotId);
+        window.location.href = '/checkout';
+      });
     });
-    parkingGrid.appendChild(spot);
-  }
-
-  reserveButton.addEventListener('click', function() {
-    if (!selectedSpot) {
-      alert('Please select a spot to reserve.');
-      return;
-    }
-    const spotId = selectedSpot.dataset.spotId;
-    const parkingLotId = 1;  // Default parking lot ID
-    const vehicleId = 1;  // Default vehicle ID
-
-    const now = new Date();
-    const endT = new Date(now.getTime() + 4 * 60 * 60 * 1000);  // + 4 hours from now
-
-    const startTime = now.toISOString().slice(0, 19).replace('T', ' ');
-    const endTime = endT.toISOString().slice(0, 19).replace('T', ' ');
-
-    //Send the json for the database to read
-    fetch('/reserve', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        spot_id: spotId,
-        parking_lot_id: parkingLotId,
-        vehicle_id: vehicleId,
-        start_time: startTime,
-        end_time: endTime
-      }),
-    })
-    .then(response => response.json())
-    .then(data => {
-      alert(data.message);
-      selectedSpot.classList.remove('selected');
-      selectedSpot.classList.add('reserved');
-      selectedSpot = null;
-    });
-  });
-});
-</script>
-
-
+  </script>
+>>>>>>> Stashed changes
 </body>
 </html>
