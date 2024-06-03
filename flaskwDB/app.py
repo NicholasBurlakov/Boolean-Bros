@@ -107,10 +107,29 @@ def userHome():
 def userProfile():
     conn = sqlite3.connect('parking.db')
     cursor = conn.cursor()
-    cursor.execute("SELECT Email FROM RegisteredUser WHERE Username = ?", (session['username'],))
-    session['email'] = cursor.fetchone()[0]
 
-    return render_template("userProfile.html", username=session['username'], email=session['email'])
+    # Get user details
+    cursor.execute('''
+                    SELECT ru.Email, v.LicensePlate, v.VehicleType, v.VehicleColor 
+                    FROM RegisteredUser ru LEFT JOIN Vehicle v ON ru.UserID = v.UserID
+                    WHERE ru.Username = ?''', (session['username'],))
+
+    user_details = cursor.fetchone()
+
+    if user_details:
+        email, license_plate, vehicle_type, vehicle_color = user_details
+    else:
+        email, license_plate, vehicle_type, vehicle_color = None, None, None, None
+
+    conn.close()
+
+    return render_template("userProfile.html",
+        username=session['username'],
+        email=email,
+        license_plate=license_plate,
+        vehicle_type=vehicle_type,
+        vehicle_color=vehicle_color
+    )
 
 
 @app.route('/reserve', methods=['POST'])
