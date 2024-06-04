@@ -151,6 +151,15 @@ def reserve():
 
     return jsonify({"message": "Reservation successful"}), 200
 
+@app.route('/reserved_spots', methods=['GET'])
+def get_reserved_spots():
+    conn = sqlite3.connect('parking.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT SpotID FROM Reservations")
+    reserved_spots = [row[0] for row in cursor.fetchall()]
+    conn.close()
+    return jsonify(reserved_spots)
+
 @app.route('/database.html')
 def database():
     tables = []
