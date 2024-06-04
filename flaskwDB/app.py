@@ -269,7 +269,9 @@ def logout():
 
 @app.route('/checkout')
 def checkout():
-    return render_template('checkout.html')
+    if 'username' in session:
+        return render_template('userCheckout.html')
+    else: return render_template('checkout.html')
 
 
 if __name__ == '__main__':
