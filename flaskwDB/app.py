@@ -273,6 +273,46 @@ def checkout():
         return render_template('userCheckout.html')
     else: return render_template('checkout.html')
 
+@app.route('/userProfile', methods=["POST"])
+def editProfile():
+    user = request.form["username"]
+    email = request.form["email"]
+    password = request.form["password"]
+    vehicle_type = request.form["vehicle-type"]
+    vehicle_color = request.form["color"]
+    license = request.form["license_plate"]
+
+    conn = sqlite3.connect('parking.db')
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM RegisteredUser WHERE Username = ?", (session['username'],))
+    user_row = cursor.fetchone()
+
+    if user_row:
+        userID = user_row[0]
+
+        if (user != user_row[1] or password != "" and password != user_row[3] or email != user_row[2]):
+            session['username'] = user
+            if password == "":
+                cursor.execute("UPDATE RegisteredUser SET Username = ?, Email = ? WHERE UserID = ?", (user, email, userID))
+            else:
+                cursor.execute("UPDATE RegisteredUser SET Username = ?, Email = ?, Password = ? WHERE UserID = ?", (user, email, password, userID))
+
+    cursor.execute("SELECT * FROM Vehicle WHERE UserID = ?", (userID,))
+    vehicle_row = cursor.fetchone()
+
+    if vehicle_row:
+        vehicleID = vehicle_row[0]
+        if vehicle_type != vehicle_row[3] or license != vehicle_row[2] or vehicle_color != vehicle_row[4]:
+            cursor.execute("UPDATE Vehicle SET LicensePlate = ?, VehicleType = ?, VehicleColor = ? WHERE VehicleID = ?", (license, vehicle_type, vehicle_color, vehicleID))
+
+
+    conn.commit()
+    conn.close()
+
+    return index()
+
+
 
 if __name__ == '__main__':
     init_db()
