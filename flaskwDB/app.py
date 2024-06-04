@@ -143,6 +143,13 @@ def reserve():
 
     conn = sqlite3.connect('parking.db')
     cursor = conn.cursor()
+
+    if('username' in session):
+        cursor.execute("SELECT UserID FROM RegisteredUser WHERE Username = ?", (session['username'],))
+        userID = cursor.fetchone()[0]
+        cursor.execute("SELECT VehicleID FROM Vehicle WHERE UserID = ?", (userID,))
+        vehicle_id = cursor.fetchone()[0]
+
     cursor.execute('''INSERT INTO reservations (SpotID, ParkingLotID, VehicleID, StartTime, EndTime) 
                       VALUES (?, ?, ?, ?, ?)''',
             (spot_id, parking_lot_id, vehicle_id, start_time, end_time))
@@ -304,13 +311,15 @@ def editProfile():
     if vehicle_row:
         vehicleID = vehicle_row[0]
         if vehicle_type != vehicle_row[3] or license != vehicle_row[2] or vehicle_color != vehicle_row[4]:
-            cursor.execute("UPDATE Vehicle SET LicensePlate = ?, VehicleType = ?, VehicleColor = ? WHERE VehicleID = ?", (license, vehicle_type, vehicle_color, vehicleID))
-
+            if license == "":
+                cursor.execute("UPDATE Vehicle SET VehicleType = ?, VehicleColor = ? WHERE VehicleID = ?", (vehicle_type, vehicle_color, vehicleID))
+            else:
+                cursor.execute("UPDATE Vehicle SET LicensePlate = ?, VehicleType = ?, VehicleColor = ? WHERE VehicleID = ?", (license, vehicle_type, vehicle_color, vehicleID))
 
     conn.commit()
     conn.close()
 
-    return index()
+    return userProfile()
 
 
 
