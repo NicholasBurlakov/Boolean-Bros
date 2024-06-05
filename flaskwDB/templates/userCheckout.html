@@ -111,7 +111,6 @@ span.price {
 <body>
 
 <h2>Responsive Checkout Form</h2>
-<p>Resize the browser window to see the effect. When the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other.</p>
 <div class="row">
   <div class="col-75">
     <div class="container">
@@ -176,13 +175,21 @@ span.price {
   </div>
   <div class="col-25">
     <div class="container">
-      <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span></h4>
-      <p><a href="#">Parking Spot</a> <span class="price">$15</span></p>
+      <p>Parking Spot<span class="price"></span></p>
+      <label for="parking-time">Select Parking Time</label>
+      <select id="parking-time">
+        <option value="30">30 minutes</option>
+        <option value="60">1 hour</option>
+        <option value="90">1.5 hours</option>
+        <option value="120">2 hours</option>
+        <option value="150">2.5 hours</option>
+        <option value="180">3 hours</option>
+        <option value="210">3.5 hours</option>
+        <option value="240">4 hours</option>
+      </select>
       <hr>
-      <p>Total <span class="price" style="color:black"><b>$15</b></span></p>
     </div>
   </div>
-</div>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const checkoutForm = document.getElementById('checkout-form');
