@@ -1,8 +1,10 @@
 import pytest
-from app import app  # Import your Flask app
+from app import app as flask_app  # Import your Flask app
 
 @pytest.fixture
-def client():
-    with app.test_client() as client:
-        with app.app_context():
-            yield client
+def app():
+    yield flask_app
+
+@pytest.fixture
+def client(app):
+    return app.test_client()
