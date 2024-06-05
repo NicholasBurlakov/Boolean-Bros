@@ -137,23 +137,23 @@ def reserve():
     data = request.json
     spot_id = data.get('spot_id')
     parking_lot_id = data.get('parking_lot_id', 1)  # Assuming a default parking lot ID
+    vehicle_id = data.get('vehicle_id', 999)  # Assuming a default vehicle ID
     start_time = data.get('start_time', '2024-01-01 00:00:00')  # Default start time
     end_time = data.get('end_time', '2024-12-31 00:00:00')  # Default end time
 
     conn = sqlite3.connect('parking.db')
     cursor = conn.cursor()
 
-    if 'username' in session:
+    vehicle_id = 999
+    if('username' in session):
         cursor.execute("SELECT UserID FROM RegisteredUser WHERE Username = ?", (session['username'],))
         userID = cursor.fetchone()[0]
         cursor.execute("SELECT VehicleID FROM Vehicle WHERE UserID = ?", (userID,))
         vehicle_id = cursor.fetchone()[0]
-    else:
-        vehicle_id = data.get('vehicle_id', 1)  # Assuming a default vehicle ID
 
-    cursor.execute('''INSERT INTO Reservations (SpotID, ParkingLotID, VehicleID, StartTime, EndTime) 
+    cursor.execute('''INSERT INTO reservations (SpotID, ParkingLotID, VehicleID, StartTime, EndTime) 
                       VALUES (?, ?, ?, ?, ?)''',
-                   (spot_id, parking_lot_id, vehicle_id, start_time, end_time))
+            (spot_id, parking_lot_id, vehicle_id, start_time, end_time))
     conn.commit()
     conn.close()
 
