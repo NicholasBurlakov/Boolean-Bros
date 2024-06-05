@@ -207,7 +207,8 @@ span.price {
       const vehicleId = 1;  // Default vehicle ID
 
       const now = new Date();
-      const endT = new Date(now.getTime() + 4 * 60 * 60 * 1000);  // + 4 hours from now
+      const parkingTime = document.getElementById('parking-time').value;
+      const endT = new Date(now.getTime() + parkingTime * 60 * 1000);  // Calculate end time based on selected parking time
 
       const startTime = now.toISOString().slice(0, 19).replace('T', ' ');
       const endTime = endT.toISOString().slice(0, 19).replace('T', ' ');
@@ -222,7 +223,7 @@ span.price {
           parking_lot_id: parkingLotId,
           vehicle_id: vehicleId,
           start_time: startTime,
-          end_time: endTime
+          end_time: endTime  // Send calculated end time to the server
         }),
       })
       .then(response => response.json())
@@ -234,5 +235,6 @@ span.price {
     });
   });
 </script>
+
 </body>
 </html>
