@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import os
 
 from flask import Flask, render_template, request, jsonify, session
@@ -85,6 +85,20 @@ def index():
 
 @app.route('/availability.html')
 def avl():
+
+    conn = sqlite3.connect('parking.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM Reservations")
+
+    res = cursor.fetchall()
+    currentTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    for r in res:
+        if r[5] < currentTime:
+            cursor.execute("DELETE FROM Reservations WHERE ReservationID = ?", (r[0],))
+
+    conn.commit()
+    conn.close()
+
     if 'username' in session:
         return render_template('userAvailability.html', username=session['username'])
     else:
