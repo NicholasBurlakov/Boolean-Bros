@@ -220,6 +220,7 @@ span.price {
   </div>
   <div class="col-25">
     <div class="container">
+      <div class="form-column">
       <p>Parking Spot<span class="price"></span></p>
       <label for="parking-time">Select Parking Time</label>
       <select id="parking-time">
@@ -234,6 +235,7 @@ span.price {
       </select>
       <hr>
     </div>
+  </div>
   </div>
 
 <script>
@@ -283,6 +285,8 @@ span.price {
         localStorage.removeItem('selectedSpotId');
         window.location.href = '/availability.html';
       });
+
+
     });
   });
 </script>
