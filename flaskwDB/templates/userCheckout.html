@@ -190,6 +190,7 @@ span.price {
       <hr>
     </div>
   </div>
+</div>
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const checkoutForm = document.getElementById('checkout-form');
@@ -204,14 +205,15 @@ span.price {
       }
 
       const parkingLotId = 1;  // Default parking lot ID
-      const vehicleId = 1;  // Default vehicle ID
+      const vehicleId = 999;  // Default vehicle ID
 
-      const now = new Date();
+      const now = new Date( (new Date()).getTime() - 7 * 60 * 60 * 1000);  // Subtract 7 hours from current time to get PST
       const parkingTime = document.getElementById('parking-time').value;
       const endT = new Date(now.getTime() + parkingTime * 60 * 1000);  // Calculate end time based on selected parking time
 
       const startTime = now.toISOString().slice(0, 19).replace('T', ' ');
       const endTime = endT.toISOString().slice(0, 19).replace('T', ' ');
+      console.log(startTime)
 
       fetch('/reserve', {
         method: 'POST',

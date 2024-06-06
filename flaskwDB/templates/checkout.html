@@ -241,7 +241,7 @@ span.price {
       const vehicleType = document.getElementById('vehicle-type').value;
       const carColor = document.getElementById('color').value;
 
-      const now = new Date();
+      const now = new Date( (new Date()).getTime() - 7 * 60 * 60 * 1000);  // Subtract 7 hours from current time to get PST
       const parkingTime = document.getElementById('parking-time').value;
       const endT = new Date(now.getTime() + parkingTime * 60 * 1000);  // increment by selected minutes
 
