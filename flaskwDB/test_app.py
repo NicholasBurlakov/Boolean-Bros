@@ -35,8 +35,6 @@ def test_index_main_sections(client):
 def test_index_dynamic_content(client):
     """Test dynamic content like images and user-specific elements."""
     response = client.get('/index.html')
-    # Assuming there's a check for a logged-in user or other dynamic conditions:
-    # Adjust the path or session condition as per your app logic
     assert b"empty_parking" in response.data  # Check if the image loads correctly
 
 
@@ -156,3 +154,41 @@ def test_navigation_and_login_link(client):
     assert b"Contact" in response.data
     assert b"Parking Availability" in response.data
     assert b"Already have an account? Login" in response.data
+
+
+"""
+Tests For Database
+"""
+
+def test_main_header_display(client):
+    """Test that the main header 'Database Tables' is displayed."""
+    response = client.get('/database.html')
+    content = response.data.decode('utf-8')
+    assert '<h1>Database Tables</h1>' in content, "Main header is missing or incorrect."
+
+
+def test_table_names_display(client):
+    """Test that specific table names are displayed."""
+    response = client.get('/database.html')
+    content = response.data.decode('utf-8')
+    assert '<h2>Reservations</h2>' in content, "Reservations table header is missing."
+    assert '<h2>Vehicle</h2>' in content, "Vehicle table header is missing."
+    assert '<h2>RegisteredUser</h2>' in content, "RegisteredUser table header is missing."
+
+
+def test_reservations_table_structure(client):
+    """Test the attributes of the Reservations tables."""
+    response = client.get('/database.html')
+    content = response.data.decode('utf-8')
+    assert '<th>ReservationID</th>' in content, "ReservationID column is missing."
+    assert '<th>UserID</th>' in content, "UserID column is missing."
+    assert '<th>VehicleID</th>' in content, "UserID column is missing."
+    # Add checks for other expected columns similarly.
+
+
+def test_data_rendering_in_tables(client):
+    """Test that data is rendered in tables."""
+    response = client.get('/database.html')
+    content = response.data.decode('utf-8')
+    assert '<td>' in content and '</td>' in content, "Data cells are not being rendered."
+
